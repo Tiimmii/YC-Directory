@@ -1,10 +1,13 @@
-import StartupCard from "@/components/StartupCard";
+import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
 import SearchForm from "../../components/SearchForm";
 import { client } from "@/sanity/lib/client";
 import { STARTUPS_QUERY } from "@/lib/queries";
 
 // run npx sanity@latest schema extract --path=./sanity/extract.json to extract sanity schemas
 // create sanity-typegen.json file in root directory, copy and paste necessary code inside and run npx sanity@latest typegen generate to generate typescript types for schemas and GROQ queries
+// make sure to copy and paste scripts for typegen in package.json to automate type generation.
+// after these run npm run typegen for automation and adding new types
+
 export default async function Home({ searchParams }: {
   searchParams: Promise<{ query?: string }>
 }) {
@@ -26,7 +29,7 @@ export default async function Home({ searchParams }: {
         </p>
         <ul className="mt-7 card_grid">
           {posts?.length>0?(
-            posts.map((post: StartupCardType, index: number)=>(
+            posts.map((post: StartupTypeCard, index: number)=>(
               <StartupCard key={post?._id} post={post}/>
             ))
           ):
