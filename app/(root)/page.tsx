@@ -7,9 +7,9 @@ export default async function Home({ searchParams }: {
   const query = (await searchParams).query;
 
   const posts = [{
-    _createdAt: 'Yesterday',
+    _createdAt: new Date(),
     views: 55,
-    author: { _id: 1},
+    author: { _id: 1, name: 'Adrian'},
     _id: 1,
     description: 'This is a description.',
     image: 'https://media.northwest.education/wp-content/uploads/2023/11/28104107/12.png',
