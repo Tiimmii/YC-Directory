@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import 'easymde/dist/easymde.min.css'
 
+
+//make sure to npm install next-sanity@canary after installing sanity and import 'easymde/dist/easymde.min.css' here
 const workSans = localFont({
   src: [
     {
       path: "./fonts/WorkSans-Black.ttf",
       weight: "900",
-      style: "normal",
+      style: "normal",    
     },
     {
       path: "./fonts/WorkSans-ExtraBold.ttf",
@@ -66,7 +69,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${workSans.variable} antialiased`}
+        className={`${workSans.variable} antialiased`} 
       >
         {children}
       </body>

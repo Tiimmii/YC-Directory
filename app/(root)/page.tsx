@@ -1,21 +1,17 @@
 import StartupCard from "@/components/StartupCard";
 import SearchForm from "../../components/SearchForm";
+import { client } from "@/sanity/lib/client";
+import { STARTUPS_QUERY } from "@/lib/queries";
 
+// run npx sanity@latest schema extract --path=./sanity/extract.json to extract sanity schemas
+// create sanity-typegen.json file in root directory, copy and paste necessary code inside and run npx sanity@latest typegen generate to generate typescript types for schemas and GROQ queries
 export default async function Home({ searchParams }: {
   searchParams: Promise<{ query?: string }>
 }) {
   const query = (await searchParams).query;
 
-  const posts = [{
-    _createdAt: new Date(),
-    views: 55,
-    author: { _id: 1, name: 'Adrian'},
-    _id: 1,
-    description: 'This is a description.',
-    image: 'https://media.northwest.education/wp-content/uploads/2023/11/28104107/12.png',
-    category: 'Robots',
-    title: 'We Robots'
-  }]
+  const posts = await client.fetch(STARTUPS_QUERY);
+  
   return (
     <>
       <section className="pink_container">
