@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import 'easymde/dist/easymde.min.css'
+import { Toaster } from "@/components/ui/toaster";
 
 
 //make sure to npm install next-sanity@canary after installing sanity and import 'easymde/dist/easymde.min.css' here
@@ -72,6 +73,7 @@ export default function RootLayout({
         className={`${workSans.variable} antialiased`} 
       >
         {children}
+        <Toaster/>
       </body>
     </html>
   );

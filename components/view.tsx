@@ -1,14 +1,25 @@
 import React from 'react'
 import Ping from './Ping'
+import { client } from '@/sanity/lib/client'
+import { STARTUP_VIEWS_QUERY } from '@/lib/queries';
+import { wrtieClient } from '@/sanity/lib/write-client';
+//make sure to set after: true in next.config.ts
+import { unstable_after as after } from "next/server";
 
-const View = ({ id }: {id:string} ) => {
+const View = async ({ id }: { id:string } ) => {
+    const { views: totalViews } = await client.withConfig({useCdn : false}).fetch(STARTUP_VIEWS_QUERY, {id});
+    
+    after(   
+        async () => await wrtieClient.patch(id).set({views: totalViews + 1}).commit()
+    )
+    console.log({view: totalViews})
   return (
     <div className='view-container'>
       <div className='absolute -top-2 -right-2'>
         <Ping/>
       </div>
       <p className='view-text'>
-        <span className='font-black'>100 Views</span>
+        <span className='font-black'>Views: {totalViews}</span>
       </p>
     </div>
   )
