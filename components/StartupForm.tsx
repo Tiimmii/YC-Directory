@@ -8,7 +8,8 @@ import { Send } from 'lucide-react';
 import { formSchema } from '@/lib/validation';
 import { z } from 'zod';
 import { useToast } from '@/hooks/use-toast';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
+import { createPitch } from '@/lib/action';
 
 //npx shadcn@latest add input textarea toast
 //npm i @uiw/react-md-editor for the markdown editor
@@ -17,7 +18,7 @@ const StartupForm = () => {
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [pitch, setPitch ] = useState('');
     const { toast } = useToast();
-    const { router } = useRouter();
+    const  router  = useRouter();
     const handleFormSubmit = async (prevState: any, formData: FormData)=>{
         try{
             const formValues = {
@@ -30,15 +31,14 @@ const StartupForm = () => {
 
             await formSchema.parseAsync(formValues);
 
-            console.log(formValues)
-            // if(result.status == 'SUCCESS'){
-            //     toast({
-            //         title: 'Success',
-            //         description: 'Your startup Pitch has been created successfullt',
-            //     })
-            //     router.push(`/startup/${result.id}`)
-            // }
-            //const result = await createIdea(prevState, formData, pitch);
+            const result = await createPitch(prevState, formData, pitch);
+            if(result.status == 'SUCCESS'){
+                toast({
+                    title: 'Success',
+                    description: 'Your startup Pitch has been created successfully',
+                })
+                router.push(`/startup/${result._id}`)
+            }
         } 
         catch(error){
             if(error instanceof z.ZodError){
