@@ -4,7 +4,7 @@ import { auth } from '@/auth'
 import { parseServerActionResponse } from './utils';
 //npm install slugify
 import slugify from 'slugify';
-import { wrtieClient } from "@/sanity/lib/write-client";
+import { writeClient } from "@/sanity/lib/write-client";
 
 export const createPitch = async (
     state: any,
@@ -37,7 +37,7 @@ export const createPitch = async (
             pitch
         }
 
-        const result = await wrtieClient.create({
+        const result = await writeClient.withConfig({useCdn: false}).create({
             _type: 'startup', ...startup
         })
 
