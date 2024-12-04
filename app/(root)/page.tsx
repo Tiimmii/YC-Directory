@@ -1,6 +1,5 @@
 import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
 import SearchForm from "../../components/SearchForm";
-import { client } from "@/sanity/lib/client";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { auth } from "@/auth";
@@ -15,7 +14,7 @@ import { auth } from "@/auth";
 // 1. run npm i server-only
 // 2. create new  lib file in /sanity called live.ts
 // 3. copy code in live.ts 
-// 4. set in .env.local NEXT_PUBLIC_SANITY_API_VERSION = "vX"
+// 4. set in .env.local NEXT_PUBLIC_SANITY_API_VERSION = "vX" 
 // 5. Next change post to the new post below
 // 6. import <SanityLive/> at the bottom
 export default async function Home({ searchParams }: {
