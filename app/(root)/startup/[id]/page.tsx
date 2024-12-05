@@ -11,7 +11,7 @@ import Image from "next/image";
 
 import markdownit from "markdown-it";
 import { Skeleton } from "@/components/ui/skeleton";
-import View from "@/components/View";
+import Views from "@/components/Views";
 import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
 
 const md = markdownit();
@@ -99,7 +99,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         )}
 
         <Suspense fallback={<Skeleton className="view_skeleton" />}>
-          <View id={id} />
+          <Views id={id} />
         </Suspense>
       </section>
     </>

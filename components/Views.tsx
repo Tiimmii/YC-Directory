@@ -6,7 +6,7 @@ import { writeClient } from '@/sanity/lib/write-client';
 //make sure to set after: true in next.config.ts
 import { unstable_after as after } from "next/server";
 
-const View = async ({ id }: { id:string } ) => {
+const Views = async ({ id }: { id:string } ) => {
     const { views: totalViews } = await client.withConfig({useCdn : false}).fetch(STARTUP_VIEWS_QUERY, {id});
     
     after(   
@@ -25,4 +25,4 @@ const View = async ({ id }: { id:string } ) => {
   )
 }
 
-export default View
+export default Views
